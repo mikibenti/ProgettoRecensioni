@@ -14,6 +14,6 @@ $conn = new mysqli($servernameDB, $usernameDB, $passwordDB, $dbnameDB);
 - La connessione NON va a buon fine: l'oggetto $conn nel campo connect_error ha una stringa che contiene l'errore
 */
 if ($conn->connect_error) {
-  header("Location: errore.html");  // Se la connessione NON va a buon fine, faccio un redirect a una pagina di errore
+  header("Location: errore_loginreg.php");  // Se la connessione NON va a buon fine, faccio un redirect a una pagina di errore
 }
 ?>
