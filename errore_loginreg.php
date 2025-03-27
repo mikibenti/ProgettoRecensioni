@@ -16,8 +16,11 @@
 <div class="container text-center error-container">
         <div class="alert alert-danger shadow-lg" role="alert">
             <h4 class="alert-heading">Errore!</h4>
-            <p><?php echo htmlspecialchars($errorMessage); ?></p>
-            <hr>
+            <p>
+                <?php 
+                    echo htmlspecialchars($errorMessage); 
+                ?>
+            </p><hr>
             <a href="paginalogin.html" class="btn btn-primary mt-2">Torna Indietro</a>
         </div>
     </div>

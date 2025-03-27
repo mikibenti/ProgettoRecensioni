@@ -3,6 +3,7 @@
     include("connessione.php");
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $password = hash("sha256",$password);
     $sql = "SELECT * FROM utente WHERE username = '$username'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
