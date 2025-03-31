@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa;
+}
+.welcome-container {
+    margin-top: 50px;
+}
+.card {
+    border-radius: 15px;
+    padding: 20px;
+}
+.user-info {
+    list-style: none;
+    padding: 0;
+}
+.user-info li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
