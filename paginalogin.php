@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -27,11 +30,21 @@
                             </div>
                             <button class="btn btn-primary mt-3">Accedi</button>
                         </form>
-                        <p class="mt-3">Non sei registrato? <a href="paginaregistrazione.html">Crea un account</a></p>
+                        <p class="mt-3">Non sei registrato? <a href="paginaregistrazione.php">Crea un account</a></p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+                if(isset($_SESSION["errMessage"])) {
+                    echo "alert('".$_SESSION["errMessage"]."');";
+                    unset($_SESSION["errMessage"]);
+                }
+            ?>
+        });
+    </script>
 </body>
 </html>

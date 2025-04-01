@@ -19,7 +19,7 @@
             <h4 class="alert-heading">Logout Effettuato</h4>
             <p>Sei stato disconnesso correttamente.</p>
             <hr>
-            <a href="paginalogin.html" class="btn btn-primary mt-2">Torna Indietro</a>
+            <a href="paginalogin.php" class="btn btn-primary mt-2">Torna Indietro</a>
         </div>
     </div>
 </body>

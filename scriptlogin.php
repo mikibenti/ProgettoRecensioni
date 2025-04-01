@@ -11,14 +11,14 @@
         $passwordDB = $row["password"];
         if ($passwordDB != $password) {
             $_SESSION["errMessage"] = "Password Errata";
-            header('Location: errore_loginreg.php');
+            header('Location: paginalogin.php');
         } else {
             $_SESSION["loggedUser"] = $username;
             $_SESSION["logged"] = true;
             header('Location: benvenuto.php');
         }
     } else {
-        header('Location: errore_loginreg.php');
         $_SESSION["errMessage"] = "Utente Inesistente";
+        header('Location: paginalogin.php');
     }
 ?>

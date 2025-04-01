@@ -10,13 +10,13 @@
     $result = $conn->query($sql);
     if ($result->num_rows != 0) {
         $_SESSION["errMessage"] = "Username già registrato";
-        header('Location: errore_loginreg.php');
+        header('Location: paginaregistrazione.php');
     } else {
         $sql = "SELECT * FROM utente WHERE email = '$email'";
         $result = $conn->query($sql);
         if ($result->num_rows != 0) {
             $_SESSION["errMessage"] = "Email già registrata";
-            header('Location: errore_loginreg.php');
+            header('Location: paginaregistrazione.php');
         } else {
             $password = hash("sha256",$password);
             $sql = "INSERT INTO utente (username, password, nome, cognome, email) VALUES ('$username', '$password', '$nome', '$cognome', '$email')";
@@ -26,7 +26,7 @@
                 header('Location: benvenuto.php');
             } else {
                 $_SESSION["errMessage"] = "Errore nella registrazione";
-                header('Location: errore_loginreg.php');
+                header('Location: paginaregistrazione.php');
             }
         }
     }

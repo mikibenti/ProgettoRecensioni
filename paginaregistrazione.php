@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +35,18 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="Crea una password" required/>
             </div>
             <button type="submit" class="btn btn-primary">Registrati</button>
-            <a href="./paginalogin.html" class="btn btn-danger mt-3">Torna Indietro</a>
+            <a href="./paginalogin.php" class="btn btn-danger mt-3">Torna Indietro</a>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+                if(isset($_SESSION["errMessage"])) {
+                    echo "alert('".$_SESSION["errMessage"]."');";
+                    unset($_SESSION["errMessage"]);
+                }
+            ?>
+        });
+    </script>
 </body>
 </html>
