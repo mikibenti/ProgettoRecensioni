@@ -6,7 +6,7 @@
         $welcomeMessage = "Benvenuto $username";
     } else {
         $_SESSION["errMessage"] = "Sessione Scaduta";
-        header('Location: errore_loginreg.php');
+        header('Location: paginalogin.php');
     }
     $sql = "SELECT * FROM utente WHERE username = '$username'";
     $result = $conn->query($sql);
@@ -30,10 +30,10 @@
                 <p class="card-text text-muted">Hai effettuato l'accesso con successo.</p>
                 <ul class="user-info">
                     <?php while($row = $result->fetch_assoc()) { ?>
-                        <li><strong>Nome:</strong> <?php echo $row["nome"]; ?></li>
-                        <li><strong>Cognome:</strong> <?php echo $row["cognome"]; ?></li>
+                        <li><strong>Nome:</strong> <?php echo $row["nome"]; ?></li>           
+                        <li><strong>Cognome:</strong> <?php echo $row["cognome"]; ?></li>       
                         <li><strong>Email:</strong> <?php echo $row["email"]; ?></li>
-                    <?php } ?>
+                    <?php } ?>  
                 </ul>
                 <a href="scriptlogout.php" class="btn btn-danger mt-3">Log-Out</a>
             </div>

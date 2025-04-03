@@ -39,7 +39,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             <?php
-                if(isset($_SESSION["errMessage"])) {
+                if(isset($_SESSION["errMessage"])) {                    //funzione per alert con messaggio
                     echo "alert('".$_SESSION["errMessage"]."');";
                     unset($_SESSION["errMessage"]);
                 }
