@@ -10,6 +10,11 @@
     }
     $sql = "SELECT * FROM utente WHERE username = '$username'";
     $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $nome = $row["nome"];
+    $cognome = $row["cognome"];
+    $email = $row["email"];
+    $id = $row["id"];
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -32,12 +37,45 @@
                 <p class="card-text text-muted">Hai effettuato l'accesso con successo.</p>
                 <ul class="user-info">
                     <!-- print user info -->
-                    <?php while($row = $result->fetch_assoc()) { ?>
-                        <li><strong>Nome:</strong> <?php echo $row["nome"]; ?></li>           
-                        <li><strong>Cognome:</strong> <?php echo $row["cognome"]; ?></li>       
-                        <li><strong>Email:</strong> <?php echo $row["email"]; ?></li>
-                    <?php } ?>  
+                        <li><strong>Nome:</strong> <?php echo $nome ?></li>           
+                        <li><strong>Cognome:</strong> <?php echo $cognome ?></li>       
+                        <li><strong>Email:</strong> <?php echo $email ?></li>
+                        <li><strong>Numero recensioni effetuate:</strong>
+                            <?php
+                                $sql = "SELECT COUNT(*) as conto FROM `recensione` WHERE idutente = $id;";
+                                $result = $conn->query($sql);
+                                $row = $result->fetch_assoc();
+                                echo $row["conto"];
+                            ?>
+                        </li>
                 </ul>
+                <?php
+                    if($row["conto"] == 0) {
+                        echo "<p>Nessuna recensione effetuata</p>";
+                    } else {
+                        $sql = "SELECT ris.nome, ris.indirizzo, rec.voto, rec.data FROM `recensione` rec JOIN ristorante ris ON rec.codiceristorante = ris.codice JOIN utente u ON rec.idutente = u.id WHERE u.id = $id;";
+                        $result = $conn->query($sql);
+                        echo "<table class='table table-bordered border-primary'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>Nome Ristorante</th>
+                                    <th scope='col'>Indirizzo</th>
+                                    <th scope='col'>Voto</th>
+                                    <th scope='col'>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["nome"] . "</td>";
+                                echo "<td>" . $row["indirizzo"] . "</td>";
+                                echo "<td>" . $row["voto"] . "</td>";
+                                echo "<td>" . $row["data"] . "</td>";
+                                echo "</tr>";
+                            }
+                        echo "</tbody></table>";
+                    }
+                ?>
                 <!-- trigger button modal "logout" -->
                 <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#logoutModal">Log-Out</button>
                 <!-- modal -->
