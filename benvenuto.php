@@ -45,13 +45,54 @@
                                 $sql = "SELECT COUNT(*) as conto FROM `recensione` WHERE idutente = $id;";
                                 $result = $conn->query($sql);
                                 $row = $result->fetch_assoc();
-                                echo $row["conto"];
+                                $conto = $row["conto"];
+                                echo $conto;
                             ?>
                         </li>
                 </ul>
+                <!-- trigger button modal "logout" -->
+                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#insertModal">Nuova Recensione</button>
+                <!-- modal -->
+                <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- insert title here-->
+                        <h1 class="modal-title fs-5" id="insertModalLabel">Inserisci i Dati</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- insert message here -->
+                    <div class="modal-body">
+                        <label for="form-select">Voto</label>
+                        <select class="form-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <label for="form-select">Ristorante</label>
+                        <select class="form-select">
+                            <?php
+                                $sql = "SELECT nome FROM `ristorante`";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<option value=".$row["nome"].">".$row["nome"]."</option>";
+                                    }
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
+                        <a href="inseriscirecensione.php" class="btn btn-primary">Conferma</a>                    </div>
+                    </div>
+                </div>
+            </div>
                 <?php
-                    if($row["conto"] == 0) {
-                        echo "<p>Nessuna recensione effetuata</p>";
+                    if($conto == 0) {
+                        echo "<p style=color:red>Nessuna recensione effetuata</p>";
                     } else {
                         $sql = "SELECT ris.nome, ris.indirizzo, rec.voto, rec.data FROM `recensione` rec JOIN ristorante ris ON rec.codiceristorante = ris.codice JOIN utente u ON rec.idutente = u.id WHERE u.id = $id;";
                         $result = $conn->query($sql);
