@@ -14,7 +14,8 @@
     $nome = $row["nome"];
     $cognome = $row["cognome"];
     $email = $row["email"];
-    $id = $row["id"];
+    $_SESSION["id"] = $row["id"];
+    $id = $_SESSION["id"];
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -51,7 +52,7 @@
                         </li>
                 </ul>
                 <!-- trigger button modal "logout" -->
-                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#insertModal">Nuova Recensione</button>
+                <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#insertModal">Nuova Recensione</button>
                 <!-- modal -->
                 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -63,16 +64,22 @@
                     </div>
                     <!-- insert message here -->
                     <div class="modal-body">
-                        <label for="form-select">Voto</label>
-                        <select class="form-select">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                    <form action="inseriscirecensione.php" method="POST">
+                        <label for="voto">Voto</label>
+                        <div class="mb-3" id="voto">
+                            <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                    echo "
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='voto' id='voto$i' value='$i' required>
+                                        <label class='form-check-label' for='voto$i'>$i</label>
+                                    </div>
+                                    ";
+                                }
+                            ?>
+                        </div>
                         <label for="form-select">Ristorante</label>
-                        <select class="form-select">
+                        <select class="form-select" name="nome_ristorante" id="nome_ristorante">
                             <?php
                                 $sql = "SELECT nome FROM `ristorante`";
                                 $result = $conn->query($sql);
@@ -86,7 +93,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
-                        <a href="inseriscirecensione.php" class="btn btn-primary">Conferma</a>                    </div>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Conferma</button>
+                        </form>
+                        <!-- <a href="inseriscirecensione.php" class="btn btn-primary">Conferma</a>                     -->
+                    </div>
                     </div>
                 </div>
             </div>
@@ -141,5 +151,15 @@
         </div>
     </div>
 </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+                if(isset($_SESSION["errMessage"])) {                    //funzione per alert con messaggio
+                    echo "alert('".$_SESSION["errMessage"]."');";
+                    unset($_SESSION["errMessage"]);
+                }
+            ?>
+        });
+    </script>
 </body>
 </html>
