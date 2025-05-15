@@ -2,17 +2,14 @@
     session_start();
     if($_SESSION["admin"] == true) {
         header('Location: pannelloadmin.php');
-        exit;
     }
     include("connessione.php");
     $username = $_SESSION["loggedUser"];
     if($_SESSION["logged"] != false) {
         $welcomeMessage = "Benvenuto $username";
-        exit;
     } else {
         $_SESSION["errMessage"] = "Sessione Scaduta";
         header('Location: paginalogin.php');
-        exit;
     }
     $sql = "SELECT * FROM utente WHERE username = '$username'";
     $result = $conn->query($sql);
@@ -57,9 +54,7 @@
                             ?>
                         </li>
                 </ul>
-                <!-- trigger button modal "logout" -->
                 <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#insertModal">Nuova Recensione</button>
-                <!-- modal -->
                 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="insertModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -101,7 +96,6 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Conferma</button>
                         </form>
-                        <!-- <a href="inseriscirecensione.php" class="btn btn-primary">Conferma</a>                     -->
                     </div>
                     </div>
                 </div>

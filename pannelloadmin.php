@@ -19,10 +19,12 @@
 </head>
 <body>
     <?php
-        $sql = "SELECT * FROM `ristorante`;";
+        $sql = "SELECT r.*, (SELECT COUNT(*) FROM recensione rec WHERE rec.codiceristorante = r.codice) AS numero_recensioni FROM ristorante r";
         $result = $conn->query($sql);
-        if($result->num_rows == 0) {
-            echo "<p style='color:red'>Nessuna Ristorante Presente</p>";
+        if($result === false) {
+            echo "<p style='color:red'>Errore nel database: " . $conn->error . "</p>";
+        } elseif($result->num_rows == 0) {
+            echo "<p style='color:red'>Nessun Ristorante Presente</p>";
         } else {
             echo "<table class='table table-bordered border-primary'>
                 <thead>
@@ -31,20 +33,37 @@
                         <th scope='col'>Nome</th>
                         <th scope='col'>Indirizzo</th>
                         <th scope='col'>Città</th>
+                        <th scope='col'>Numero di Recensioni</th>
                     </tr>
                 </thead>
                 <tbody>";
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["codice"] . "</td>";
+                    echo "<td>" . $row["codice"] . "</td>"; 
                     echo "<td>" . $row["nome"] . "</td>";
                     echo "<td>" . $row["indirizzo"] . "</td>";
                     echo "<td>" . $row["citta"] . "</td>";
+                    echo "<td>" . $row["numero_recensioni"] . "</td>";
                     echo "</tr>";
                 }
             echo "</tbody></table>";
         }
     ?>
+        <form action="inserisciristorante.php" method="post">
+            <label for="nome">Nome</label>
+                            <div class="mb-3" id="nome">
+                                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required/>
+                            </div>
+                            <label for="indirizzo">Indirizzo</label>
+                            <div class="mb-3" id="indirizzo">
+                                <input type="text" class="form-control" name="indirizzo" id="indirizzo" placeholder="Indirizzo" required/>
+                            </div>
+                            <label for="citta">Città</label>
+                            <div class="mb-3" id="citta">
+                                <input type="text" class="form-control" name="citta" id="citta" placeholder="Città" required/>
+                            </div>
+                            <button type="submit">Invia</button>
+        </form>
                     <!-- trigger button modal "logout" -->
                 <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#logoutModal">Log-Out</button>
                 <!-- modal -->
@@ -65,5 +84,15 @@
                         <a href="scriptlogout.php" class="btn btn-primary">Conferma</a>                    </div>
                     </div>
                 </div>
+                    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+                if(isset($_SESSION["errMessage"])) {                    //funzione per alert con messaggio
+                    echo "alert('".$_SESSION["errMessage"]."');";
+                    unset($_SESSION["errMessage"]);
+                }
+            ?>
+        });
+    </script>
 </body>
 </html>
