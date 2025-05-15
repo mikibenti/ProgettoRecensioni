@@ -13,6 +13,10 @@
             $_SESSION["errMessage"] = "Password Errata";
             header('Location: paginalogin.php');
         } else {
+            $_SESSION["admin"] = false;
+            if($row["isAdmin"]) {
+                $_SESSION["admin"] = true;
+            }
             $_SESSION["loggedUser"] = $username;
             $_SESSION["logged"] = true;
             header('Location: benvenuto.php');

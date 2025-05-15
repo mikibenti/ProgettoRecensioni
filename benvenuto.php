@@ -1,12 +1,18 @@
 <?php
     session_start();
+    if($_SESSION["admin"] == true) {
+        header('Location: pannelloadmin.php');
+        exit;
+    }
     include("connessione.php");
     $username = $_SESSION["loggedUser"];
     if($_SESSION["logged"] != false) {
         $welcomeMessage = "Benvenuto $username";
+        exit;
     } else {
         $_SESSION["errMessage"] = "Sessione Scaduta";
         header('Location: paginalogin.php');
+        exit;
     }
     $sql = "SELECT * FROM utente WHERE username = '$username'";
     $result = $conn->query($sql);
