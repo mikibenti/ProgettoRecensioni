@@ -12,8 +12,10 @@
         $nome = $_POST["nome"];
         $indirizzo = $_POST["indirizzo"];
         $citta = $_POST["citta"];
-        $query = "INSERT INTO ristorante (codice, nome, indirizzo, citta) 
-            VALUES ('ris$conto', '$nome', '$indirizzo', '$citta')";
+        $latitudine = $_POST["latitudine"];
+        $longitudine = $_POST["longitudine"];
+        $query = "INSERT INTO ristorante (codice, nome, indirizzo, citta, latitudine, longitudine) 
+          VALUES ('ris$conto', '$nome', '$indirizzo', '$citta', '$latitudine', '$longitudine')";
         if ($conn->query($query) === TRUE) {
             $_SESSION["errMessage"] = 'Ristorante inserito con successo';
         } else {
