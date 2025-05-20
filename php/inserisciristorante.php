@@ -5,7 +5,7 @@
     $result = $conn->query($sql);
         if ($result === false) {
             $_SESSION["errMessage"] = 'Errore' . $conn->error;
-            header("Location: pannelloadmin.php");
+            header("Location: ./../pages/pannelloadmin.php");
         }
         $row = $result->fetch_assoc();
         $conto = $row["conto"] + 1;
@@ -21,5 +21,5 @@
         } else {
             $_SESSION["errMessage"] = 'Errore inserimento ristorante: ' . $conn->error;
         }
-        header("Location: pannelloadmin.php");
+        header("Location: ./../pages/pannelloadmin.php");
 ?>

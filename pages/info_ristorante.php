@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connessione.php");
+include("./../php/connessione.php");
 
 if(!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
     $_SESSION["errMessage"] = "Sessione scaduta o non valida";
@@ -26,7 +26,7 @@ $result_recensioni = $conn->query($sql_recensioni);
     <title>Dettagli Ristorante</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./styleHome.css">
+    <link rel="stylesheet" href="../css/styleHome.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -97,7 +97,7 @@ $result_recensioni = $conn->query($sql_recensioni);
         const lat = <?php echo $ristorante['latitudine']; ?>;
         const lng = <?php echo $ristorante['longitudine']; ?>;
 
-        const map = L.map('map').setView([lat, lng], 15);
+        const map = L.map('map').setView([lat, lng], 20);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'

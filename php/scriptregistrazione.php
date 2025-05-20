@@ -11,23 +11,23 @@
     $result = $conn->query($sql);
     if ($result->num_rows != 0) {
         $_SESSION["errMessage"] = "Username già registrato";
-        header('Location: paginaregistrazione.php');
+        header('Location: ./../pages/paginaregistrazione.php');
     } else {
         $sql = "SELECT * FROM utente WHERE email = '$email'";
         $result = $conn->query($sql);
         if ($result->num_rows != 0) {
             $_SESSION["errMessage"] = "Email già registrata";
-            header('Location: paginaregistrazione.php');
+            header('Location: ./../pages/paginaregistrazione.php');
         } else {
             $password = hash("sha256",$password);
             $sql = "INSERT INTO utente (username, password, nome, cognome, email) VALUES ('$username', '$password', '$nome', '$cognome', '$email')";
             if ($conn->query($sql) === TRUE) {
                 $_SESSION["loggedUser"] = $username;
                 $_SESSION["logged"] = true;
-                header('Location: benvenuto.php');
+                header('Location: ./../pages/benvenuto.php');
             } else {
                 $_SESSION["errMessage"] = "Errore nella registrazione";
-                header('Location: paginaregistrazione.php');
+                header('Location: ./../pages/paginaregistrazione.php');
             }
         }
     }

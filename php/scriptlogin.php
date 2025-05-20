@@ -11,7 +11,7 @@
         $passwordDB = $row["password"];
         if ($passwordDB != $password) {
             $_SESSION["errMessage"] = "Password Errata";
-            header('Location: paginalogin.php');
+            header('Location: ./../pages/paginalogin.php');
         } else {
             $_SESSION["admin"] = false;
             if($row["isAdmin"]) {
@@ -19,10 +19,10 @@
             }
             $_SESSION["loggedUser"] = $username;
             $_SESSION["logged"] = true;
-            header('Location: benvenuto.php');
+            header('Location: ./../pages/benvenuto.php');
         }
     } else {
         $_SESSION["errMessage"] = "Utente Inesistente";
-        header('Location: paginalogin.php');
+        header('Location: ./../pages/paginalogin.php');
     }
 ?>

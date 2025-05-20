@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrati</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styleReg.css">
+    <link rel="stylesheet" href="../css/styleReg.css">
 </head>
 <body>
     <div class="form-container col-md-6 col-lg-4">
         <h1>Registrati</h1>
-        <form action="scriptregistrazione.php" method="post">
+        <form action="./../php/scriptregistrazione.php" method="post">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="Inserisci il tuo nome" required/>

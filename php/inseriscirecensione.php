@@ -21,6 +21,6 @@
             $_SESSION["errMessage"] = 'errore';
         }
     }
-    header("Location: benvenuto.php");
+    header("Location: ./../pages/benvenuto.php");
     exit;
 ?>

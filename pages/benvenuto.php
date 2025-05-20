@@ -3,7 +3,7 @@
     if($_SESSION["admin"] == true) {
         header('Location: pannelloadmin.php');
     }
-    include("connessione.php");
+    include("./../php/connessione.php");
     $username = $_SESSION["loggedUser"];
     if($_SESSION["logged"] != false) {
         $welcomeMessage = "Benvenuto $username";
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./styleHome.css">
+    <link rel="stylesheet" href="../css/styleHome.css">
 </head>
 <body>
     <div class="container text-center welcome-container">
@@ -97,7 +97,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="inseriscirecensione.php" method="POST">
+                                <form action="./../php/inseriscirecensione.php" method="POST">
                                     <label for="voto" class="form-label">Voto</label>
                                     <div class="mb-3" id="voto">
                                         <?php
@@ -186,7 +186,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                <a href="scriptlogout.php" class="btn btn-danger">Conferma Logout</a>
+                                <a href="./../php/scriptlogout.php" class="btn btn-danger">Conferma Logout</a>
                             </div>
                         </div>
                     </div>

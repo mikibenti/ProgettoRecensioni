@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include("connessione.php");
+    include("./../php/connessione.php");
     if($_SESSION["admin"] == false) {
         $_SESSION["errMessage"] = "Permessi non validi";
         header('Location: paginalogin.php');
@@ -14,7 +14,7 @@
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./styleAdmin.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -90,7 +90,7 @@
                         <h5 class="card-title mb-0"><i class="fas fa-plus-circle me-2"></i>Aggiungi Ristorante</h5>
                     </div>
                     <div class="card-body">
-                        <form action="inserisciristorante.php" method="post" class="row g-3">
+                        <form action="./../php/inserisciristorante.php" method="post" class="row g-3">
                             <div class="col-md-4">
                                 <label for="nome" class="form-label">Nome</label>
                                 <input type="text" class="form-control" name="nome" id="nome" required>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Annulla</button>
-                    <a href="scriptlogout.php" class="btn btn-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    <a href="./../php/scriptlogout.php" class="btn btn-danger"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
                 </div>
             </div>
         </div>
