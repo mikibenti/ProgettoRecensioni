@@ -134,43 +134,47 @@
                 </div>
                 <div class="mt-4">
                     <h4 class="border-bottom pb-2"><i class="fas fa-list me-2"></i>Le Tue Recensioni</h4>
-                    <?php
-                        if($conto == 0) {
-                            echo '<div class="alert alert-warning mt-3"><i class="fas fa-exclamation-circle me-2"></i>Nessuna recensione effetuata</div>';
+                    <form action="./../php/eliminarecensione.php" method="POST" id="recensioniForm">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Seleziona</th>
+                    <th scope="col">Ristorante</th>
+                    <th scope="col">Indirizzo</th>
+                    <th scope="col">Voto</th>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "SELECT rec.idrecensione, ris.nome, ris.indirizzo, rec.voto, rec.data FROM `recensione` rec JOIN ristorante ris ON rec.codiceristorante = ris.codice JOIN utente u ON rec.idutente = u.id WHERE u.id = $id ORDER BY rec.data DESC;";
+                $result = $conn->query($sql);
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td><div class='form-check'><input class='form-check-input recensione-check' type='checkbox' name='recensioni[]' value='".$row["idrecensione"]."' id='recensione_".$row["idrecensione"]."'></div></td>";
+                    echo "<td>" . $row["nome"] . "</td>";
+                    echo "<td>" . $row["indirizzo"] . "</td>";
+                    echo "<td>";
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $row["voto"]) {
+                            echo '<i class="fas fa-star text-warning"></i>';
                         } else {
-                            $sql = "SELECT ris.nome, ris.indirizzo, rec.voto, rec.data FROM `recensione` rec JOIN ristorante ris ON rec.codiceristorante = ris.codice JOIN utente u ON rec.idutente = u.id WHERE u.id = $id ORDER BY rec.data DESC;";
-                            $result = $conn->query($sql);
-                            echo '<div class="table-responsive">
-                                <table class="table table-striped table-hover mt-3">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th scope="col">Ristorante</th>
-                                            <th scope="col">Indirizzo</th>
-                                            <th scope="col">Voto</th>
-                                            <th scope="col">Data</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row["nome"] . "</td>";
-                                        echo "<td>" . $row["indirizzo"] . "</td>";
-                                        echo "<td>";
-                                        for ($i = 1; $i <= 5; $i++) {
-                                            if ($i <= $row["voto"]) {
-                                                echo '<i class="fas fa-star text-warning"></i>';
-                                            } else {
-                                                echo '<i class="far fa-star text-warning"></i>';
-                                            }
-                                        }
-                                        echo "</td>";
-                                        echo "<td>" . date('d/m/Y', strtotime($row["data"])) . "</td>";
-                                        echo "</tr>";
-                                    }
-                            echo "</tbody></table></div>";
+                            echo '<i class="far fa-star text-warning"></i>';
                         }
-                    ?>
-                </div>
+                    }
+                    echo "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row["data"])) . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</form>
+                <button type="submit" form="recensioniForm" class="btn btn-outline-warning" id="eliminaBtn" disabled>
+                    <i class="fas fa-trash-alt me-2"></i>Elimina
+                </button>
                 <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#logoutModal">
                     <i class="fas fa-sign-out-alt me-2"></i>Logout
                 </button>
@@ -205,5 +209,18 @@
             ?>
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.recensione-check');
+        const eliminaBtn = document.getElementById('eliminaBtn');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkedBoxes = document.querySelectorAll('.recensione-check:checked');
+                eliminaBtn.disabled = checkedBoxes.length === 0;
+            });
+        });
+    });
+</script>
 </body>
 </html>

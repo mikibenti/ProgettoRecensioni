@@ -18,3 +18,18 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+
+#eliminaBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#eliminaBtn:not(:disabled) {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+#eliminaBtn:not(:disabled):hover {
+    background-color: #e0a800;
+    color: #212529;
+}
