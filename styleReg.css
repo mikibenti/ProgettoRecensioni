@@ -1,0 +1,86 @@
+/* Corpo con flex verticale per footer fisso in fondo */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #007bff, #6610f2);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Wrapper centrale che si espande per spingere il footer in basso */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Container form */
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    max-width: 400px;
+    width: 100%;
+}
+
+.form-container:hover {
+    transform: scale(1.02);
+}
+
+.form-container h1 {
+    margin-bottom: 20px;
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-control {
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary, .btn-danger {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Footer fisso in fondo */
+footer {
+    background-color: #f8f9fa;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #dee2e6;
+    flex-shrink: 0;
+}
+
+footer a {
+    color: #0d6efd;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
